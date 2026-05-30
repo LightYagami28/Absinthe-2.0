@@ -1,0 +1,71 @@
+# Autotools generated files
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache/
+config.h
+config.h.in
+config.log
+config.status
+configure
+stamp-h1
+.deps/
+.libs/
+
+# Build artifacts
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+*.out
+build/
+dist/
+*.dSYM/
+
+# Compiler-specific
+*.lo
+*.la
+*.lai
+*.obj
+
+# IDE & Editor files
+.vscode/
+.idea/
+.project
+.cproject
+.settings/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# User-specific files
+*.user
+*.userprefs
+*.suo
+
+# Generated documentation
+docs/html/
+docs/latex/
+docs/*.pdf
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.BAK
+*.swp
+*~
+.#*
+
+# Platform-specific
+.VisualStudio*/
+.Xcode*/
+.xcodeproj/
+
+# Lint/test outputs
+*.gcda
+*.gcno
+coverage/

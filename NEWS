@@ -1,1 +1,21 @@
-Sample NEWS file for absinthe project.
+# Absinthe 2.x Release Notes
+
+## Version 2.0.4
+- Added iPad 2,4 support
+- Fixed lockdown error -5 with improved error handling
+
+## Version 2.0.3
+- Updated device detection and communication code
+- Improved stability on various device models
+
+## Version 2.0.2
+- Added support for iPhone 4 (GSM) 5.1.1b build 9B208
+
+## Version 2.0.1
+- Fixed a possible hang in certain jailbreak scenarios
+
+## Version 2.0
+- First public release
+- Support for iOS 5.1.1 devices
+- Cross-platform support (macOS, Windows, Linux)
+- GUI application for simplified user experience
