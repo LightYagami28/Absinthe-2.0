@@ -46,12 +46,14 @@ crashreporter_t* crashreporter_connect(device_t* device) {
 		crashreporter->mover = crashreportmover_connect(device);
 		if(crashreporter->mover == NULL) {
 			error("Unable to connect to CrashReporter's mover service\n");
+			crashreporter_free(crashreporter);
 			return NULL;
 		}
 
 		crashreporter->copier = crashreportcopy_connect(device);
 		if(crashreporter->copier == NULL) {
 			error("Unable to connect to CrashReporter's copier service\n");
+			crashreporter_free(crashreporter);
 			return NULL;
 		}
 	}
