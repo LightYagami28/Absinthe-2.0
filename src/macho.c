@@ -33,7 +33,7 @@
 macho_t* macho_create() {
 	macho_t* macho = (macho_t*) malloc(sizeof(macho_t));
 	if (macho) {
-		memset(macho, '\0', sizeof(macho));
+		memset(macho, '\0', sizeof(macho_t));
 	}
 	return macho;
 }
