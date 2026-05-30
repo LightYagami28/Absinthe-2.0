@@ -2255,7 +2255,12 @@ static int jailbreak_70(const char* udid, status_cb_t status_cb,
 	char backup_dir[1024];
 	lockdownd_service_descriptor desc;
 	info("Jailbreaking 7.x!!!\n");
-	tmpnam(backup_dir);
+	snprintf(backup_dir, sizeof(backup_dir), "/tmp/absinthe-XXXXXX");
+	if (mkdtemp(backup_dir) == NULL) {
+		error("Failed to create temp backup directory\n");
+		device_free(device);
+		return -1;
+	}
 	debug("Backing up files to %s\n", backup_dir);
 
 	lockdown = lockdown_open(device);
