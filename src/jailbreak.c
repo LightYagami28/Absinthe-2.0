@@ -1899,7 +1899,6 @@ static int jailbreak_51(const char* udid, status_cb_t status_cb,
 	lockdownd_get_value(lckd, NULL, "DevicePublicKey", &racoon_plist);
 	if (!racoon_plist || (plist_get_node_type(racoon_plist) != PLIST_DATA)) {
 		status_cb("ERROR: Failed to get racoon", 0);
-		lockdown_free(lockdown);
 		device_free(device);
 		return -1;
 	}
