@@ -70,40 +70,34 @@ compatibility_t compatible_devices[] = {
     {"N90AP", "9B176"},
     {"N88AP", "9B176"},
     {"N18AP", "9B176"},
-    {"N88AP", "9B176"},
     {"K48AP", "9B176"},
 
     {"N92AP", "9B206"},
     {"N90AP", "9B206"},
     {"N88AP", "9B206"},
     {"N18AP", "9B206"},
-    {"N88AP", "9B206"},
     {"K48AP", "9B206"},
 
     {"N92AP", "9A405"},
     {"N90AP", "9A405"},
     {"N88AP", "9A405"},
     {"N18AP", "9A405"},
-    {"N88AP", "9A405"},
     {"K48AP", "9A405"},
 
     {"N92AP", "9A334"},
     {"N90AP", "9A334"},
     {"N88AP", "9A334"},
     {"N18AP", "9A334"},
-    {"N88AP", "9A334"},
     {"K48AP", "9A334"},
 
     {"N90AP", "8L1"},
     {"N88AP", "8L1"},
     {"N18AP", "8L1"},
-    {"N88AP", "8L1"},
     {"K48AP", "8L1"},
 
     {"N90AP", "8K2"},
     {"N88AP", "8K2"},
     {"N18AP", "8K2"},
-    {"N88AP", "8K2"},
     {"K48AP", "8K2"},
 
     {NULL, NULL}
@@ -3112,8 +3106,6 @@ int jailbreak(const char* udid, status_cb_t status_cb) {
 
 	} else {
 		error("Unable to find the correct build\n");
-		//res = jailbreak_50(udid, status_cb, device, lockdown, product, build);
-
 	}
 
 	free(product);
