@@ -180,6 +180,7 @@ int check_consistency(char *product, char *build)
 
     if (stat(prodstr, &buf) == -1) {
         error("Failed to open directory \"payload/%s\"\n", prodstr);
+        return -1;
     }
     // Seems legit.
     return 0;
