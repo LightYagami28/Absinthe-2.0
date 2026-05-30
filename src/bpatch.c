@@ -283,6 +283,8 @@ int bpatch_apply(bpatch_t* bpatch, const char* path) {
 		target_data = (uint8_t*) malloc(target_size + 1);
 		if (target_data == NULL) {
 			error("Unable to allocate data for new file\n");
+			if (source_data)
+				free(source_data);
 			return -1;
 		}
 		memset(target_data, '\0', target_size + 1);
@@ -329,11 +331,12 @@ int bpatch_apply(bpatch_t* bpatch, const char* path) {
 
 		// CleanUp
 		file_write(path, target_data, target_size);
+
+		if (target_data)
+			free(target_data);
+		if (source_data)
+			free(source_data);
 	}
-	//if (target_data)
-	//	free(target_data);
-	//if (source_data)
-	//	free(source_data);
 	return 0;
 }
 
