@@ -728,8 +728,8 @@ static void mb2_handle_send_files(mobilebackup2_client_t mobilebackup2, plist_t 
 		if (mb2_handle_send_file(mobilebackup2, backup_dir, str, &errplist) < 0) {
 			free(str);
 			//printf("Error when sending file '%s' to device\n", str);
-			// TODO: perhaps we can continue, we've got a multi status response?!
-			break;
+			// Per-file error is accumulated in errplist; continue with remaining files.
+			continue;
 		}
 		free(str);
 	}
