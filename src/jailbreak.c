@@ -2414,7 +2414,7 @@ static int jailbreak_70(const char* udid, status_cb_t status_cb,
 					if (seek_offset)
 						gzseek(zfile, seek_offset, 1);
 				} else {
-					if (num_of_csstores > 15) {
+					if (num_of_csstores >= 16) {
 						info("Why do you have more than 16 csstore files?\n");
 					} else {
 						char buffer[32];
@@ -2423,8 +2423,8 @@ static int jailbreak_70(const char* udid, status_cb_t status_cb,
 										"./var/mobile/Library/Caches/com.apple.LaunchServices-");
 						int num = strtoul((char *) (filename_buffer + add_len),
 								NULL, 10);
-						num_of_csstores++;
 						csstores[num_of_csstores].csstore_number = num;
+						num_of_csstores++;
 						debug("Found a csstore! (%d/%d)\n", num,
 								num_of_csstores);
 					}
