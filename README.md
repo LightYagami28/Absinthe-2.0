@@ -114,6 +114,8 @@ make
 - **IRC:** Join `#greenpois0n` on `irc.chronic-dev.org`
 - **Website:** [greenpois0n.com](http://greenpois0n.com/)
 - **Discussion:** See the Chronic-Dev forums and wiki for detailed guides
+- **Contributing:** See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
+- **Code of Conduct:** See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 ## Version History
 
