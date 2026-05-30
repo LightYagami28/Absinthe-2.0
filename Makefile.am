@@ -1,1 +1,1 @@
-SUBDIRS=tools src gui 
+SUBDIRS=tools src gui tests

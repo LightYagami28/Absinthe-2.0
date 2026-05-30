@@ -142,6 +142,6 @@ AC_SUBST(GUI_LDFLAGS)
 GUI_LDADD=$ACGUI_LDADD
 AC_SUBST(GUI_LDADD)
 
-AC_CONFIG_FILES(Makefile src/Makefile tools/Makefile gui/Makefile)
+AC_CONFIG_FILES(Makefile src/Makefile tools/Makefile gui/Makefile tests/Makefile)
 AC_OUTPUT
 
