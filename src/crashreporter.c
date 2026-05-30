@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
+#include <unistd.h>
 
 #include "debug.h"
 #include "file.h"
@@ -179,10 +180,17 @@ crashreport_t* crashreporter_last_crash(crashreporter_t* crashreporter) {
 	}
 
         char crash_file[1024];
-        tmpnam(crash_file);
-
-	FILE* output = fopen(crash_file, "wb");
+        snprintf(crash_file, sizeof(crash_file), "/tmp/absinthe-crash-XXXXXX");
+        int crash_fd = mkstemp(crash_file);
+        if (crash_fd < 0) {
+		printf("Unable to create temp file\n");
+		free(lastItem);
+		afc_file_close(crashreporter->copier->client, handle);
+		return NULL;
+        }
+	FILE* output = fdopen(crash_fd, "wb");
 	if(output == NULL) {
+		close(crash_fd);
 		printf("Unable to open local file %s\n", crash_file);
 		free(lastItem);
 		afc_file_close(crashreporter->copier->client, handle);
