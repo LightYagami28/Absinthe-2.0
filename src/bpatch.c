@@ -121,6 +121,7 @@ bpatch_t* bpatch_load(uint8_t* data, int64_t size) {
 		buf = malloc(BUFSIZE + 1);
 		if (buf == NULL) {
 			error("Unable to allocate buffer\n");
+			bpatch_free(bpatch);
 			return NULL;
 		}
 
@@ -132,6 +133,7 @@ bpatch_t* bpatch_load(uint8_t* data, int64_t size) {
 				&control_size);
 		if (err < 0 || control_size <= 0) {
 			error("Unable to decompress control block\n");
+			free(buf);
 			bpatch_free(bpatch);
 			return NULL;
 		}
@@ -139,6 +141,7 @@ bpatch_t* bpatch_load(uint8_t* data, int64_t size) {
 		// Make sure there's enough data left
 		if (bpatch->header->ctrllen + offset > size) {
 			error("Sanity check failed\n");
+			free(buf);
 			bpatch_free(bpatch);
 			return NULL;
 		}
@@ -148,6 +151,7 @@ bpatch_t* bpatch_load(uint8_t* data, int64_t size) {
 		bpatch->control = (uint8_t*) malloc(control_size + 1);
 		if (bpatch->control == NULL) {
 			error("Unable to allocate control block\n");
+			free(buf);
 			bpatch_free(bpatch);
 			return NULL;
 		}
@@ -163,6 +167,7 @@ bpatch_t* bpatch_load(uint8_t* data, int64_t size) {
 				&data_size);
 		if (err < 0 || data_size <= 0) {
 			error("Unable to decompress diff block\n");
+			free(buf);
 			bpatch_free(bpatch);
 			return NULL;
 		}
@@ -172,6 +177,8 @@ bpatch_t* bpatch_load(uint8_t* data, int64_t size) {
 		bpatch->data = malloc(data_size + 1);
 		if (bpatch->data == NULL) {
 			error("Unable to allocate memory for diff block\n");
+			free(buf);
+			bpatch_free(bpatch);
 			return NULL;
 		}
 		memset(bpatch->data, '\0', data_size);
@@ -186,6 +193,7 @@ bpatch_t* bpatch_load(uint8_t* data, int64_t size) {
 				&extra_size);
 		if (err < 0 || extra_size <= 0) {
 			error("Unable to decompress extra block\n");
+			free(buf);
 			bpatch_free(bpatch);
 			return NULL;
 		}
@@ -194,6 +202,7 @@ bpatch_t* bpatch_load(uint8_t* data, int64_t size) {
 		bpatch->extra = malloc(extra_size + 1);
 		if (bpatch->extra == NULL) {
 			error("Unable to allocate memory for extra block\n");
+			free(buf);
 			bpatch_free(bpatch);
 			return NULL;
 		}
@@ -202,6 +211,7 @@ bpatch_t* bpatch_load(uint8_t* data, int64_t size) {
 		offset += extra_size;
 	}
 
+	free(buf);
 	return bpatch;
 }
 
