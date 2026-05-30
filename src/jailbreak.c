@@ -216,7 +216,7 @@ static uint32_t get_libcopyfile_vmaddr(const char* product, const char* build) {
 
 int jb_device_is_supported(const char* product, const char* build) {
 	if ((strcmp(build, "9B176") == 0) || (strcmp(build, "9B206") == 0)
-			|| (strcmp(build, "9B208") == 0) || (strcmp(build, "11A501"))) {
+			|| (strcmp(build, "9B208") == 0) || (strcmp(build, "11A501") == 0)) {
 		char testfn[512];
 		struct stat fst;
 		snprintf(testfn, sizeof(testfn),
