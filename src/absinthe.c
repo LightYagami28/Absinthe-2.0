@@ -61,20 +61,6 @@ static struct option longopts[] = {
 	{ NULL, 0, NULL, 0 }
 };
 
-unsigned long find_aslr_slide(crashreport_t* crash, char* cache) {
-	unsigned long slide = 0;
-	if(crash == NULL || cache == NULL) {
-		error("Invalid arguments\n");
-		return 0;
-	}
-
-	dyldcache_t* dyldcache = dyldcache_open(cache);
-	if(dyldcache != NULL) {
-		dyldcache_free(dyldcache);
-	}
-	return slide;
-}
-
 static void idevice_event_cb(const idevice_event_t *event, void *user_data)
 {
 	/*char* udid = (char*)user_data;
