@@ -144,7 +144,7 @@ void dyldcache_debug(dyldcache_t* cache) {
 architecture_t* dyldcache_architecture_create() {
 	architecture_t* arch = (architecture_t*) malloc(sizeof(architecture_t));
 	if (arch) {
-		memset(arch, '\0', sizeof(architecture_t*));
+		memset(arch, '\0', sizeof(architecture_t));
 	}
 	return arch;
 }
