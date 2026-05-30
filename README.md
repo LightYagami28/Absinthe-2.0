@@ -12,6 +12,8 @@ An untethered jailbreak for iOS 5.1.1 devices. Absinthe provides permanent root 
 ## Supported Devices & Firmware
 
 ### Supported Devices (iOS 5.1.1 only)
+
+
 - iPad 3 (WiFi, CDMA, Global)
 - iPad 2 (WiFi, CDMA, GSM)
 - iPad 1
@@ -22,16 +24,18 @@ An untethered jailbreak for iOS 5.1.1 devices. Absinthe provides permanent root 
 - iPod Touch 3G
 
 ### Not Supported
+
+
 - iPad 2 WiFi R2 (new model)
 - Apple TV 2 & 3
 
 ## System Requirements
 
-| Platform | Requirements |
-|----------|--------------|
-| **macOS** | 10.5 or later (Intel) |
-| **Windows** | XP, Vista, 7 or later |
-| **Linux** | x86/x86_64, Kernel ≥ 2.6.15, libgtk+-2.0 ≥ 2.22.1 |
+| Platform    | Requirements                                    |
+| ----------- | ----------------------------------------------- |
+| **macOS**   | 10.5 or later (Intel)                          |
+| **Windows** | XP, Vista, 7 or later                          |
+| **Linux**   | x86/x86_64, Kernel ≥ 2.6.15, libgtk+-2.0 ≥ 2.22.1 |
 
 ## Usage
 
@@ -101,7 +105,7 @@ make
 ## Support & Contact
 
 - **IRC:** Join `#greenpois0n` on `irc.chronic-dev.org`
-- **Website:** http://greenpois0n.com/
+- **Website:** [greenpois0n.com](http://greenpois0n.com/)
 - **Discussion:** See the Chronic-Dev forums and wiki for detailed guides
 
 ## Version History

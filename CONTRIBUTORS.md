@@ -16,6 +16,7 @@
 ## Supporting Projects
 
 This project builds upon and incorporates knowledge from:
+
 - Previous untethered jailbreak projects
 - iOS security research community
 - Open-source exploit frameworks
