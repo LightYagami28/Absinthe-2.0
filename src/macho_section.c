@@ -43,7 +43,13 @@ void macho_section_debug(macho_section_t* section) {
 }
 
 void macho_section_free(macho_section_t* section) {
-
+	if (section) {
+		if (section->info) {
+			macho_section_info_free(section->info);
+			section->info = NULL;
+		}
+		free(section);
+	}
 }
 
 /*
@@ -64,5 +70,7 @@ void macho_section_info_debug(macho_section_info_t* info) {
 }
 
 void macho_section_info_free(macho_section_info_t* info) {
-
+	if (info) {
+		free(info);
+	}
 }

@@ -155,28 +155,42 @@ void apparition_afc_get_file_contents(afc_t* afc, const char *filename,
 }
 
 int afc_send_file(afc_t* afc, const char* local, const char* remote) {
+	if (!afc || !local || !remote) return -1;
 
-	uint64_t lockfile = 0;
+	// Read local file contents
+	FILE* f = fopen(local, "rb");
+	if (!f) {
+		error("afc_send_file: cannot open %s\n", local);
+		return -1;
+	}
+	fseek(f, 0, SEEK_END);
+	long fsize = ftell(f);
+	fseek(f, 0, SEEK_SET);
+	if (fsize <= 0) { fclose(f); return -1; }
+
+	char* contents = malloc((size_t)fsize);
+	if (!contents) { fclose(f); return -1; }
+
+	if (fread(contents, 1, (size_t)fsize, f) != (size_t)fsize) {
+		fclose(f); free(contents); return -1;
+	}
+	fclose(f);
+
+	// Open remote file via AFC
 	uint64_t my_file = 0;
-	unsigned int bytes = 0;
-
 	afc_file_open(afc->client, remote, AFC_FOPEN_WR, &my_file);
-	if (my_file) {
-		//char *outdatafile = strdup("THIS IS HOW WE DO IT, WHORE\n");
+	if (!my_file) { free(contents); return -1; }
 
-		//FIXME: right here its just sending "local/file.txt, rather than the contents of the file.
+	uint32_t bytes = 0;
+	afc_error_t err = afc_file_write(afc->client, my_file, contents, (uint32_t)fsize, &bytes);
+	free(contents);
+	afc_file_close(afc->client, my_file);
 
-		//afc_file_write(afc->client, my_file, outdatafile, strlen(outdatafile), &bytes);// <-- old code
-		afc_file_write(afc->client, my_file, local, strlen(local), &bytes);
-		//free(outdatafile);
-		if (bytes > 0)
-			printf("File transferred successfully\n");
-		else
-			printf("File write failed!!! :(\n");
-		afc_file_close(afc->client, my_file);
+	if (err != AFC_E_SUCCESS || bytes != (uint32_t)fsize) {
+		error("afc_send_file: sent %u of %ld bytes\n", bytes, fsize);
+		return -1;
 	}
 
 	printf("afc all done.\n");
-
 	return 0;
 }

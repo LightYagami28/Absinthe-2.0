@@ -452,8 +452,13 @@ void macho_sections_debug(macho_section_t** sections) {
 }
 
 void macho_sections_free(macho_section_t** sections) {
-	// TODO: Loop through and free each item
 	if (sections) {
+		int i = 0;
+		while (sections[i] != NULL) {
+			macho_section_free(sections[i]);
+			sections[i] = NULL;
+			i++;
+		}
 		free(sections);
 	}
 }

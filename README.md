@@ -1,6 +1,13 @@
 # Absinthe 2.x
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Platform: iOS](https://img.shields.io/badge/Platform-iOS%205.1.1-blue.svg)](#supported-devices--firmware)
+[![Language: C](https://img.shields.io/badge/Language-C-brightgreen.svg)](https://en.wikipedia.org/wiki/C_(programming_language))
+[![Build Status](https://img.shields.io/badge/Build-Autotools-success.svg)](#build-instructions)
+
 An untethered jailbreak for iOS 5.1.1 devices. Absinthe provides permanent root access to jailbroken devices, allowing users to modify system files, install unauthorized applications, and customize their iOS experience.
+
+**Website:** [greenpois0n.com](http://greenpois0n.com/)
 
 ## Features
 
@@ -112,10 +119,24 @@ make
 
 See [CHANGELOG.md](CHANGELOG.md) for detailed version history and improvements.
 
+## Contributors
+
+This project was developed by the Chronic-Dev Team:
+
+- **@pod2g** — iOS 5.1.1 exploitation research
+- **@planetbeing** — Kernel exploitation and vulnerability research  
+- **@pimskeks** — Exploitation and GUI development
+- **@iOPK** — Artwork and visual design
+- **Hanene Samara** — GUI development and UX
+
+Special thanks to the entire Chronic-Dev community for testing, feedback, and support.
+
+For detailed contributor information, see [CONTRIBUTORS.md](CONTRIBUTORS.md).
+
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE) file for details.
 
 ---
 
-**Note:** This is a legacy jailbreak for iOS 5.1.1. It is provided for educational and historical purposes. Modern security practices and iOS versions have evolved significantly since this tool's release.
+**⚠️ Note:** This is a legacy jailbreak for iOS 5.1.1. It is provided for educational and historical purposes only. Modern security practices and iOS versions have evolved significantly since this tool's release. Use at your own risk.
