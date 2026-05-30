@@ -23,6 +23,11 @@ unsigned int p2DataLo, p3Data;
 int firstP2Write, firstP3Write;
 int lines;
 
+// ROP helper temporaries — reset in generate_rop() before each run.
+static Addr swapTemp1;
+static Addr swapTemp2;
+static Addr tempAddr;
+
 #define ROP_MODE_MEM 1
 #define ROP_MODE_FILE 2
 FILE* ropFile;
@@ -313,9 +318,6 @@ void ropSubReg0Reg1() {
 
 #define ROP_SWAP_REG0_REG_1_LEN (ROP_SAVE_REG0_LEN + ROP_MOV_REG0_REG_1_LEN + ROP_SAVE_REG0_LEN + ROP_LOAD_REG0_LEN + ROP_MOV_REG1_REG_0_LEN + ROP_LOAD_REG0_LEN)
 void ropSwapReg0Reg1() {
-        static Addr swapTemp1 = 0;
-        static Addr swapTemp2 = 0;
-
         if(swapTemp1 == 0)
             swapTemp1 = newInteger(0);
 
@@ -359,7 +361,6 @@ void ropStoreVariableValueAtOffsetFromVariableAddress(Addr address, unsigned int
 
 void ropStoreValueAtOffsetFromVariableAddress(Addr address, unsigned int offset, unsigned int value)
 {
-    static Addr tempAddr = 0;
     if(tempAddr == 0)
         tempAddr = newInteger(0);
 
@@ -1179,6 +1180,11 @@ int generate_rop(FILE* out, int is_bootstrap, const char* firmwareName, const ch
         offsets = global_offsets[firmware][device];
 
         snprintf(dataPath, sizeof(dataPath), "data/%s/%s/fsgen", firmwareName, deviceName);
+
+        // Reset ROP helper temporaries so each run gets fresh allocations.
+        swapTemp1 = 0;
+        swapTemp2 = 0;
+        tempAddr = 0;
 
 	ropOpen();
 
