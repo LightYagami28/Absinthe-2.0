@@ -23,6 +23,7 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <dirent.h>
+#include <sys/stat.h>
 
 #include <plist/plist.h>
 
@@ -2775,11 +2776,21 @@ static int jailbreak_70(const char* udid, status_cb_t status_cb,
 
 	/*
 	 * Now, the lockdown socket is 777.
-	 * XXX: Replace getchar() with stat("/var/mobile/Media/mount.stderr") or whatever.
+	 * Wait for the filesystem remount by polling for the sentinel file.
 	 */
-	info(
-			"Please run the #Unthread application to remount the root filesystem as read/write. Hit a key to continue when done.\n");
-	getchar();
+	info("Waiting for filesystem remount...\n");
+	{
+		struct stat fst;
+		int waited = 0;
+		while (stat("/var/mobile/Media/mount.stderr", &fst) != 0) {
+			sleep(2);
+			waited += 2;
+			if (waited > 300) {
+				error("Timed out waiting for remount\n");
+				break;
+			}
+		}
+	}
 
 	/*
 	 * Goody, goody. Let's copy everything over!
