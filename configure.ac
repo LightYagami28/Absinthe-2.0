@@ -10,12 +10,18 @@ AM_INIT_AUTOMAKE()
 AM_PROG_CC_C_O
 AC_CONFIG_HEADERS(config.h)
 
-# Comment this out for production build to remove all debugging strings
-AC_DEFINE(_DEBUG,1,[debugging])
+dnl Enable debug output via --enable-debug flag
+AC_ARG_ENABLE([debug],
+  [AS_HELP_STRING([--enable-debug],[enable debug output (default: no)])],
+  [enable_debug=$enableval],
+  [enable_debug=no])
+if test "x$enable_debug" = "xyes"; then
+  AC_DEFINE(_DEBUG, 1, [Enable debug output])
+fi
 
 AC_PROG_CXX
 
-ACCFLAGS="-m32 -I\$(top_srcdir)/include -g -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES "
+ACCFLAGS="-m32 -I\$(top_srcdir)/include -g -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -Wall -Wextra -Wno-unused-parameter "
 ACSHAREDLIBS=""
 ACLDFLAGS=""
 
@@ -32,7 +38,7 @@ case "$host_os" in
 		fi
 		if test "x$BUILD_10_5" = "x1"; then
 		SYSTYPE=osx.10.5
-		ACCFLAGS+="-fPIC -arch i386 -arch ppc -isysroot $SDK_DIR/MacOSX10.5.sdk -mmacosx-version-min=10.6 "
+		ACCFLAGS+="-fPIC -arch i386 -arch ppc -isysroot $SDK_DIR/MacOSX10.5.sdk -mmacosx-version-min=10.6 -Wall -Wextra -Wno-unused-parameter "
 		ACSHAREDLIBS+="-lpthread -lz -lm -liconv -lssl -lcrypto -lxml2 "
 		ACLDFLAGS="-arch i386 -arch ppc "
 		LIBSDIR="\$(top_srcdir)/staticlibs/$SYSTYPE"
@@ -43,7 +49,7 @@ case "$host_os" in
                 ACGUI_LDADD+="-framework IOKit -framework Cocoa -framework System"
 		else
 		SYSTYPE=osx
-		ACCFLAGS+="-fPIC -arch i386 "
+		ACCFLAGS+="-fPIC -arch i386 -Wall -Wextra -Wno-unused-parameter "
 		ACSHAREDLIBS+="-lpthread -lz -lm -liconv -lssl -lcrypto -lxml2 "
 		ACLDFLAGS+="-arch i386 "
 		LIBSDIR="\$(top_srcdir)/staticlibs/$SYSTYPE"
@@ -61,7 +67,7 @@ case "$host_os" in
 		case "$BUILD_HOST_CPU" in
 		x86_64)
 		SYSTYPE=linux.x86_64
-		ACCFLAGS="-fPIC -I\$(top_srcdir)/include -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES "
+		ACCFLAGS="-fPIC -I\$(top_srcdir)/include -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -Wall -Wextra -Wno-unused-parameter "
 		ACSHAREDLIBS+="-lpthread -lz -lm -lssl -lcrypto -lxml2"
 		ACLDFLAGS+="-s"
 		LIBSDIR="\$(top_srcdir)/staticlibs/$SYSTYPE"
@@ -72,7 +78,7 @@ case "$host_os" in
 		;;
 		*)
 		SYSTYPE=linux
-		ACCFLAGS+="-fPIC -I\$(top_srcdir)/include -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES "
+		ACCFLAGS+="-fPIC -I\$(top_srcdir)/include -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -Wall -Wextra -Wno-unused-parameter "
 		ACSHAREDLIBS+="-lpthread -lz -lm -lssl -lcrypto -lxml2"
 		ACLDFLAGS+="-s"
 		LIBSDIR="\$(top_srcdir)/staticlibs/$SYSTYPE"
@@ -85,7 +91,7 @@ case "$host_os" in
 	;;
 	mingw32)
 		SYSTYPE=win32
-		ACCFLAGS+="-DWIN32 -D__LITTLE_ENDIAN__=1 -DLIBXML_STATIC=1 "
+		ACCFLAGS+="-DWIN32 -D__LITTLE_ENDIAN__=1 -DLIBXML_STATIC=1 -Wall -Wextra -Wno-unused-parameter "
 		ACSHAREDLIBS+="\$(top_srcdir)/staticlibs/win32/libz.a -lm -lws2_32 -lgdi32 -lole32 "
 		ACLDFLAGS+="-s"
 		LIBSDIR="\$(top_srcdir)/staticlibs/$SYSTYPE"
