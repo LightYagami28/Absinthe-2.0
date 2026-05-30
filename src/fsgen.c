@@ -295,7 +295,7 @@ void ropMovReg0Reg4() {
         ropWrite(USELESS);
 }
 
-#define ROP_MOV_REG0_REG_4_LEN 0xc
+#define ROP_MOV_REG1_REG_4_LEN 0xc
 void ropMovReg1Reg4() {
         ropWrite(dscs + offsets->GADGET_MOV_R1_R4__POP_R47);
         ropWrite(USELESS);
