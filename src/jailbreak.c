@@ -2222,8 +2222,10 @@ void stroke_lockdownd(device_t * device)
     magic = __builtin_bswap32(size);
     plist_free(crashy);
 
-    if (idevice_connect(device->client, 62078, &connection)) {
+    if (idevice_connect(device->client, 62078, &connection) != IDEVICE_E_SUCCESS) {
         error("Failed to connect to lockdownd.\n");
+        free(request);
+        return;
     }
     idevice_connection_send(connection, &magic, 4, &sent);
     idevice_connection_send(connection, request, size, &sent);
@@ -2233,8 +2235,10 @@ void stroke_lockdownd(device_t * device)
     if (size) {
         void *ptr = malloc(size);
         idevice_connection_receive_timeout(connection, ptr, &size, &sent, 5000);
+        free(ptr);
     }
     idevice_disconnect(connection);
+    free(request);
 
     // XXX: Wait for lockdownd to start.
     sleep(5);
